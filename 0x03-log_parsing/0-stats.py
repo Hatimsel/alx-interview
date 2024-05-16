@@ -57,6 +57,6 @@ try:
             line_count = 0
 
 except Exception as e:
-    print("Error:", e)
+    print(e)
 finally:
     print_statistics()
