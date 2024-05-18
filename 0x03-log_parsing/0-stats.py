@@ -17,7 +17,7 @@ line_count = 0
 
 def print_statistics():
     """Prints the file size and status code counts"""
-    print("File_size: {}".format(total_size))
+    print("File size: {}".format(total_size))
     # sorted_dict = dict(sorted(status_code.items(),
                               # key=lambda item: item[1],
                               # reverse=True))
