@@ -6,7 +6,9 @@ import signal
 import sys
 
 
-pattern = re.compile(r'^(\d{1,3}\.){3}\d{1,3} - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\] "GET /projects/260 HTTP/1\.1" \d{3} \d+$')
+pattern = re.compile(r'^(\d{1,3}\.){3}\d{1,3} - \[\d{4}-\d{2}-'
+                     r'\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\] '
+                     r'"GET /projects/260 HTTP/1\.1" \d{3} \d+$')
 
 status_code = {"200": 0, "301": 0, "400": 0, "401": 0,
                "403": 0, "404": 0, "405": 0, "500": 0}
@@ -18,17 +20,11 @@ line_count = 0
 def print_statistics():
     """Prints the file size and status code counts"""
     print("File size: {}".format(total_size))
-    # sorted_dict = dict(sorted(status_code.items(),
-                              # key=lambda item: item[1],
-                              # reverse=True))
-
-    # for st_code, count in sorted_dict.items():
-    #     if count > 0:
-    #         print("{}: {}".format(st_code, count))
 
     for st_code in sorted(status_code.keys()):
         if status_code[st_code] > 0:
             print("{}: {}".format(st_code, status_code[st_code]))
+
 
 def sigint_handler(signum, frame):
     """Handles the SIGINT signal (CTRL + C)"""
