@@ -7,7 +7,7 @@ def island_perimeter(grid):
     def is_water_or_outside(i, j):
         """Determines if the surface is water or ground"""
         return i < 0 or j < 0 or i >= len(grid) or\
-                j >= len(grid[0]) or grid[i][j] == 0
+            j >= len(grid[0]) or grid[i][j] == 0
 
     perimeter = 0
 
