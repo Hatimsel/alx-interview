@@ -3,46 +3,34 @@
 
 
 def isWinner(x, nums):
-    """Returns the winner of the game"""
-    def calculate_primes_up_to(n):
-        """Calculates all primes possible up to n"""
+    def sieve(n):
         is_prime = [True] * (n + 1)
         p = 2
         while (p * p <= n):
-            if (is_prime[p] == True):
+            if is_prime[p]:
                 for i in range(p * p, n + 1, p):
                     is_prime[i] = False
             p += 1
-        is_prime[0], is_prime[1] = False, False
-        primes = [p for p in range(n + 1) if is_prime[p]]
-        return primes
+        is_prime[0] = is_prime[1] = False
+        primes = [i for i in range(n + 1) if is_prime[i]]
+        return primes, is_prime
 
-    def winner_of_game(n):
-        primes = calculate_primes_up_to(n)
+    def count_primes_up_to(n, primes, is_prime):
+        if n < 2:
+            return 0
+        return sum(is_prime[2:n+1])
 
-        current_set = set(range(1, n + 1))
-        maria_turn = True
-
-        while True:
-            available_moves = [p for p in primes if p in current_set]
-
-            if not available_moves:
-                return "Ben" if maria_turn else "Maria"
-
-            chosen_prime = min(available_moves)
-            for multiple in range(chosen_prime, n + 1, chosen_prime):
-                if multiple in current_set:
-                    current_set.remove(multiple)
-
-            maria_turn = not maria_turn
+    max_n = max(nums)
+    primes, is_prime = sieve(max_n)
 
     maria_wins = 0
     ben_wins = 0
+
     for n in nums:
-        winner = winner_of_game(n)
-        if winner == "Maria":
+        prime_count = count_primes_up_to(n, primes, is_prime)
+        if prime_count % 2 == 1:
             maria_wins += 1
-        elif winner == "Ben":
+        else:
             ben_wins += 1
 
     if maria_wins > ben_wins:
