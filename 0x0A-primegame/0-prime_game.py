@@ -3,7 +3,9 @@
 
 
 def isWinner(x, nums):
+    """Returns the winner of a prime game"""
     def sieve(n):
+        """REturns all possible prime numbers up to n"""
         is_prime = [True] * (n + 1)
         p = 2
         while (p * p <= n):
@@ -16,6 +18,7 @@ def isWinner(x, nums):
         return primes, is_prime
 
     def count_primes_up_to(n, primes, is_prime):
+        """Counts prime numbers up to n"""
         if n < 2:
             return 0
         return sum(is_prime[2:n+1])
